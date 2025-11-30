@@ -1,3 +1,5 @@
+package Block;
+
 //블록의 종류
 public enum BlockType
 {

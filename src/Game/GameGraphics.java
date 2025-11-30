@@ -1,3 +1,7 @@
+package Game;
+
+import Block.BlockType;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -27,6 +31,31 @@ public class GameGraphics {
 
     //이미지 필드 반환
     //나중에 x, y에 맞게끔 수정 후 제공 예정
+
+    public BufferedImage getImg(BlockType type, int statement)
+    {
+        switch (type)
+        {
+
+            case Wall:
+
+                if (statement == 2) //not invisible, blocked
+                {return img_Wall[0];}
+
+                else if (statement == 3) //invisible, blocked
+                {return img_Wall[1];}
+
+                break;
+
+            case Player:
+                break;
+
+            case null : return img_Field;
+        }
+
+        return null; //오류 발생시 반환
+    }
+
     public BufferedImage getImgField()
     {
         return img_Field;

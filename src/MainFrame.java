@@ -1,8 +1,11 @@
+import Game.Field;
+import Game.Map;
+
 import javax.swing.*;
 
-public class GameFrame extends JFrame {
+public class MainFrame extends JFrame {
 
-    public GameFrame() //생성자
+    public MainFrame() //생성자
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 800);

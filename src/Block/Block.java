@@ -1,9 +1,9 @@
-
+package Block;
 //블록 위치의 경우 Map으로 설정
 
 //변수 좌표와 성질을 저장하는 구조체
 //구조체 선언 위해 수정 불가능한 final 사용
- public class Block
+public abstract class Block
 {
     //블록 성질
     protected boolean blocked; //이동이 막히는지
@@ -37,32 +37,6 @@
         this.type = type; //type 지정
     }
 
-    //턴 끝닐때 수행 기능
-    public void turnEnd(boolean observed) //관찰된 상태인지
-    {
-        if (observed)
-        {
-            return; //관찰된 상태면 바로 return
-        }
-
-        if (changedBlocked) //막힘 상태 바꾸기
-        {
-            blocked = ! blocked; //반전
-        }
-
-        if (changedInvisible) //보이는 상태 바꾸기
-        {
-            invisible = ! invisible;
-        }
-
-    }
-
-    //같은 칸 도달시 해야할 일
-    //없음
-    public void collisionAct() {
-
-    }
-
     //상태 반환하기
     //(막힌 상태) (투과해서 보이지 않는 상태) 반환하기
     public int getState()
@@ -83,5 +57,15 @@
     {
         return type;
     }
+
+
+    //턴 끝닐때 수행 기능
+    public abstract void turnEnd(boolean observed); //관찰된 상태인지
+
+
+    //같은 칸 도달시 해야할 일
+    public abstract void collisionAct(BlockType type);
+
+
 
 }
