@@ -24,10 +24,13 @@ public class Field extends JPanel implements KeyListener {
 
         this.requestFocus();
         setFocusable(true); //초점 맞추기 하기
+        this.addKeyListener(this); //keylistener 추가
     }
 
     public void paintComponent(Graphics g) //다시 그리는 함수
     {
+        //System.out.println(current_map.entityPos.get(0).getPosX() + " " + current_map.entityPos.get(0).getPosY());
+
         // float scale = 1.0f;//scale 조정하기 구현 예정
 
         BufferedImage image = null; //출력 객체
@@ -41,26 +44,55 @@ public class Field extends JPanel implements KeyListener {
         current_map.blockMap.forEach(((position, block) ->
 
                 g.drawImage(G_Graphics.getImg(block.getType(), block.getState()),
-                        (position.getPosX() * 84) + 55, (position.getPosY() * 89) + 1, null)
+                        (position.getPosX() * 85) + 55, (position.getPosY() * 90) + 1, null)
         ));
 
-        //람다 식으로 배경 출력
-        current_map.entityMaps.forEach(entityMap ->
+        //람다 식으로 앤티티 출력
+        for (int i = 0; i < current_map.entities.size(); i++)
+        {
+            g.drawImage(G_Graphics.getImg(current_map.entities.get(i).getType(), current_map.entities.get(i).getState()),
+                    (current_map.entityPos.get(i).getPosX() * 88) + 56, (current_map.entityPos.get(i).getPosY() * 95) + 1, null);
+        }
 
-                g.drawImage(G_Graphics.getImg(entityMap.entity.getType(), entityMap.entity.getState()),
-                        (entityMap.pos.getPosX() * 84) + 55, (entityMap.pos.getPosY() * 89) + 1, null)
-        );
+
     }
 
     @Override
-    public void keyTyped(KeyEvent e)
+    public void keyPressed(KeyEvent e)
     {
+        boolean temp = false;
 
+        if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W)
+        {
+           // System.out.println("Up");
+            temp = current_map.entities.getFirst().Move(current_map, current_map.entityPos.getFirst(), 0 );
 
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D)
+        {
+            //System.out.println("Down");
+            temp = current_map.entities.getFirst().Move(current_map, current_map.entityPos.getFirst(), 1 );
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)
+        {
+            //System.out.println("Left");
+            temp = current_map.entities.getFirst().Move(current_map, current_map.entityPos.getFirst(), 2 );
+
+        }
+        if  (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A)
+        {
+            //System.out.println("Right");
+            temp = current_map.entities.getFirst().Move(current_map, current_map.entityPos.getFirst(), 3 );
+        }
+
+        repaint();
+
+        //if (temp == true)
+            //System.out.println(current_map.entityPos.getFirst().getPosX() + " " + current_map.entityPos.getFirst().getPosY());
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyReleased(KeyEvent e) {}

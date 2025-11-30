@@ -8,38 +8,28 @@ import Block.Entity.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//static 사용 위해서 사용 (이유는 모르지만 오류는 발생함)
 public record Map()
 {
     //Block.Block: 모든 블록의 부모 역활
     //Block.Entity: 모든 Entity의 부모 역활
-    static HashMap<Position, Block> blockMap = new HashMap<Position, Block>();
+    public static HashMap<BlockPosition, Block> blockMap = new HashMap<BlockPosition, Block>();
 
-    //내부 class static 설정
-    static class EntityMap
-    {
-        public Position  pos;
-        public Entity entity;
+    public static ArrayList<BlockPosition> entityPos = new ArrayList<BlockPosition>(); //entity 위치
+    public static ArrayList<Entity> entities = new ArrayList<Entity>(); //entity 객체
 
-        public EntityMap(Position pos, Entity entity)
-        {
-            this.pos = pos;
-            this.entity = entity;
-        }
-    }
-
-    static ArrayList<EntityMap> entityMaps = new ArrayList<EntityMap>(); //entity map들
 
     public Map()
     {
         Block block = new Wall(true, true, false, false);
         //초기 필드 상태 대입 예정
-        blockMap.put(new Position(0,0), new Wall());
-        blockMap.put(new Position(2,2), new Wall());
-        blockMap.put(new Position(3,5), block);
-        blockMap.put(new Position(7,9), block);
+        blockMap.put(new BlockPosition(0,0), new Wall());
+        blockMap.put(new BlockPosition(2,2), new Wall());
+        blockMap.put(new BlockPosition(3,5), block);
+        blockMap.put(new BlockPosition(7,9), block);
 
-        entityMaps.addFirst
-                (new EntityMap(new Position(3,3), new Player()));
+        entityPos.add(new BlockPosition(5,7));
+        entities.add(new Player());
 
     }
 }

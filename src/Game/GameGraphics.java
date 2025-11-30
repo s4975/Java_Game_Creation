@@ -12,8 +12,9 @@ public class GameGraphics {
     //외부에서 바로 접근 가능
     //그래픽을 저장하고 있는
     final private BufferedImage img_Field; //필드 사진을 담는 변수
-
     final private BufferedImage[] img_Wall = new BufferedImage[2]; //벽 상태를 받는 변수
+    final private BufferedImage img_Player; //플레이어 이미지
+
 
     public GameGraphics()
     {
@@ -22,6 +23,7 @@ public class GameGraphics {
             img_Field = ImageIO.read(new File("Graphic/Field.png")); //사진 받아오기
             img_Wall[0] = ImageIO.read(new File("Graphic/Wall_0.png")); //벽 사진
             img_Wall[1] = ImageIO.read(new File("Graphic/Wall_1.png")); //유리 사진
+            img_Player = ImageIO.read(new File("Graphic/Player.png"));
 
         } catch (IOException e) {
             System.out.println("error: 경로가 잘못 되었습니다.");
@@ -48,7 +50,7 @@ public class GameGraphics {
                 break;
 
             case Player:
-                break;
+                return img_Player; //player 이미지를 반환
 
             case null : return img_Field;
         }

@@ -1,3 +1,4 @@
+
 void main()
 {
     new MainFrame();
@@ -11,4 +12,4 @@ void main()
 //ordinal: 순번 (0부터 시작) 리턴
 //compareTo: 순번 차이를 리턴
 //valueOf: 문자열과 일치하는 열거 객체 리턴
-//values: 모든 열거 객체 배열 리턴
+//values: 모든 열거 객체 배열 리턴ww

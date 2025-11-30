@@ -2,6 +2,7 @@ package Block.Entity;
 
 import Block.*;
 import Game.Field;
+import Game.Map;
 
 public abstract class Entity extends Block
 {
@@ -12,7 +13,7 @@ public abstract class Entity extends Block
         super(type); //player 지정
     }
 
-    public abstract void Move(Field field, Position position, int direction);
+    public abstract boolean Move(Map map, BlockPosition blockPosition, int direction);
 
     public abstract void Vision(Field field); //시아 각도
 }
