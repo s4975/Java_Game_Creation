@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 public class Field extends JPanel {
 
-    private final GameGraphics G_Graphics = new GameGraphics(); //그래픽 생성
 
     public Field()
     {
