@@ -7,6 +7,9 @@
 
 11.30   : Wall 객체 만들기
 
+
 11.30   : Player 객체 만들기
 
 11.30   : Player 움직이게 만들기
+
+12.09 : Player move sycle 구현
