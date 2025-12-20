@@ -11,18 +11,25 @@ import java.io.*;
 public class MainFrame extends JFrame
 {
     JPanel currentPanel; //현재 화면에 보여지고 있는 패널
+    JPanel StagePanel; //스테이지 페널
+    JPanel LobbyPanel; //Lobby 패널
+
+    String Game_Stage = ""; //현재 play 하고 있는 stage
 
     boolean DeveloperMode = false; //개발자 모드
 
     public MainFrame() //생성자
     {
+        StagePanel = new StagePanel(this); //stage panel 생성
+        LobbyPanel = new Lobby(this); //로비 화면 생성
+
         setTitle("슈뢰딩거의 고양이를 아십니까?");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 800);
 
         if (!DeveloperMode)  //기본 코드
         {
-            currentPanel = new StagePanel(this);
+            currentPanel = LobbyPanel; //현재 화면은 로비 패널
             add(currentPanel);
         }
 
@@ -30,7 +37,7 @@ public class MainFrame extends JFrame
         {
             //객체 직렬화 test
             //외부 파일 명
-            String fileName = "StagePanel/Stage1.obj";
+            String fileName = "Stage/Stage1.obj";
 
             //직렬화 할 객체
             StageMap To_File = new StageMap();
@@ -90,9 +97,39 @@ public class MainFrame extends JFrame
     }
 
     //현재 보여지는 화면을 Field로 바꾼다.
-    public void changeToField()
+    public void changeToStagePanel()
     {
+        changePanel(StagePanel);
+    }
 
+    //현재 보이는 화면을 Lobby Panel로 바꾼다.
+    public void changeToLobbyPanel()
+    {
+        changePanel(LobbyPanel);
+    }
+
+    //현재 보여지는 화면을 GamePanel로 바꾼다.
+    public void changeToGamePanel(String stage)
+    {
+        Game_Stage = stage; //스테이지 설정
+        JPanel GamePanel = new Field(LoadField("Stage/" + stage + ".obj"), this); //스테이지 만들기
+
+        changePanel(GamePanel);
+    }
+
+    //Panel로 화면 바꾸는 함수
+    private void changePanel(JPanel panel)
+    {
+        remove(currentPanel); //현재 패널 제거
+        currentPanel = panel; //Panel로 변경
+        add(currentPanel); //다시 불러오기
+
+        //해당 화면 초점 맞추기
+        currentPanel.requestFocus();
+        currentPanel.setFocusable(true);
+
+        currentPanel.repaint(); //다시 그리기
+        setVisible(true); //화면에 보이게 하기
     }
 
 }

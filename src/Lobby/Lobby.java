@@ -16,9 +16,12 @@ public class Lobby extends JPanel implements ActionListener
     BufferedImage Lobby_Img; //로비 이미지 화면
     JButton startButton; //시작 버튼
 
+    MainFrame frame; //해당 창의 frame
 
     public  Lobby(MainFrame frame)
     {
+        this.frame = frame; //프레임 가져오기
+
         //로비 화면 가져오기
         try
         {
@@ -51,9 +54,7 @@ public class Lobby extends JPanel implements ActionListener
     {
         if (e.getSource() == startButton)
         {
-
+            frame.changeToStagePanel(); //스테이지 패널로 바꾸기
         }
-
-
     }
 }

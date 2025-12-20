@@ -3,7 +3,7 @@ package Game;
 import Main.MainFrame;
 
 import javax.swing.*;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -22,11 +22,8 @@ public class Field extends JPanel implements KeyListener {
         this.start_Map = stage_Map; //start_Map은 그대로 사용
         this.current_Map = new StageMap(stage_Map); //current_Map은 복사해서 사용
 
-        this.requestFocus();
-        setFocusable(true); //초점 맞추기 하기
+        this.setBackground(new Color(73, 73, 73));
         this.addKeyListener(this); //listener 추가
-
-        repaint();
     }
 
     //필드 상태를 초기 상태로 reset하는 함수
