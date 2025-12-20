@@ -1,8 +1,9 @@
 package Block;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class BlockPosition
+public class BlockPosition implements Serializable //직렬화 가능
 {
     //X, Y의 위치
     private int posX; //x 죄표 (0~11)
@@ -20,36 +21,40 @@ public class BlockPosition
         if (this.posY > 6) this.posY = 6;
     }
 
+    //복사생성자: 입력 position을 복사해서 새로운 position을 만든다.
+    public BlockPosition(BlockPosition copied)
+    {
+        //복사 생성해서 제작
+        this.posX = copied.posX;
+        this.posY = copied.posY;
+    }
+
     public void setPos(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
     }
 
+    //반환
     public int getPosX() {return posX;}
 
     public int getPosY() {return posY;}
 
     //x 죄표 (0~11), y 좌표 (0~6)
-    public void goUp() { if (posY > 0) posY--; }
-
-    public void goDown()
+    //dx, dy 크기 만큼 블록의 좌표를 옮긴다.
+    public void moveTo(int dx, int dy)
     {
-        if (posY < 6) this.posY += 1;
-    }
+        this.posX += dx;
+        if (this.posX < 0) this.posX = 0; //0보다 작으면 0으로
+        if (this.posX > 11) this.posX = 11; //11보다 크면 11로
 
-    public void goLeft()
-    {
-        if (posX > 0) this.posX -= 1;
-    }
-
-    public void goRight()
-    {
-        if (posX < 11) this.posX += 1;
+        this.posY += dy;
+        if (this.posY < 0) this.posY = 0; //0보다 작으면 0으로
+        if (this.posY > 6) this.posY = 6; //6보다 크면 6으로
     }
 
     //equals 매서드 오버라이팅
     //객체의 x, y좌표가 같다면 true, 다르다면 false를 반환
-    //Game.Map 기능을 사용하기 위해 오버라이딩을 사용함
+    //Game.StageMap 기능을 사용하기 위해 오버라이딩을 사용함
     //미 실시시 기본 object의 equal 함수 (주소값을 비교)를 불러와서 원하는 값을 얻을수가 없음
     @Override
     public boolean equals(Object o) {
@@ -63,5 +68,4 @@ public class BlockPosition
     public int hashCode() {
         return Objects.hash(posX, posY);
     }
-
 }

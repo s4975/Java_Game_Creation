@@ -12,7 +12,7 @@ public class GameGraphics {
     //외부에서 바로 접근 가능
     //그래픽을 저장하고 있는
     final private BufferedImage img_Field; //필드 사진을 담는 변수
-    final private BufferedImage[] img_Wall = new BufferedImage[2]; //벽 상태를 받는 변수
+    final private BufferedImage[] img_Wall = new BufferedImage[4]; //벽 상태를 받는 변수
     final private BufferedImage img_Player; //플레이어 이미지
 
 
@@ -21,9 +21,13 @@ public class GameGraphics {
         try
         {
             img_Field = ImageIO.read(new File("Graphic/Field.png")); //사진 받아오기
-            img_Wall[0] = ImageIO.read(new File("Graphic/Wall_0.png")); //벽 사진
-            img_Wall[1] = ImageIO.read(new File("Graphic/Wall_1.png")); //유리 사진
-            img_Player = ImageIO.read(new File("Graphic/Player.png"));
+
+            img_Wall[0] = null;
+            img_Wall[1] = ImageIO.read(new File("Graphic/Wall_1.png")); //안개 사진
+            img_Wall[2] = ImageIO.read(new File("Graphic/Wall_2.png")); //유리 사진
+            img_Wall[3] = ImageIO.read(new File("Graphic/Wall_3.png")); //벽 사진
+
+            img_Player = ImageIO.read(new File("Graphic/Player.png")); //플레이어 사진
 
         } catch (IOException e) {
             System.out.println("error: 경로가 잘못 되었습니다.");
@@ -40,44 +44,16 @@ public class GameGraphics {
         {
 
             case Wall:
-
-                if (statement == 2) //not invisible, blocked
-                {return img_Wall[0];}
-
-                else if (statement == 3) //invisible, blocked
-                {return img_Wall[1];}
+                if (statement >= 0 && statement < 4)
+                    return img_Wall[statement]; //현재 상태 wall을 반환
 
                 break;
 
-            case Player:
-                return img_Player; //player 이미지를 반환
+            case Player: return img_Player; //player 이미지를 반환
 
             case null : return img_Field;
         }
 
         return null; //오류 발생시 반환
     }
-
-    public BufferedImage getImgField()
-    {
-        return img_Field;
-    }
-
-    public  BufferedImage getWall(int statement)
-    {
-        if (statement == 2) //not invisible, blocked
-        {
-            return img_Wall[0];
-        }
-        else if (statement == 3) //invisible, blocked
-        {
-            return img_Wall[1];
-        }
-
-
-        //else문에 걸리지 않을 경우
-        return null;
-    }
-
-
 }

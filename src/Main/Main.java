@@ -1,3 +1,4 @@
+import Main.MainFrame;
 
 void main()
 {

@@ -1,94 +1,75 @@
 package Game;
 
+import Main.MainFrame;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 
 public class Field extends JPanel implements KeyListener {
 
     private final GameGraphics G_Graphics = new GameGraphics(); //그래픽 생성
+    private final MainFrame MAIN_Frame; //MainFrame 알기
 
-    private final Map start_map; //초기 맵
+    private final StageMap start_Map; //초기 맵
+    private StageMap current_Map; //현재 맵
 
-    private Map current_map; //현재 맵
-
-    public Field(Map start_map)
+    public Field(StageMap stage_Map, MainFrame frame)
     {
-        this.start_map = start_map;
-        this.current_map = start_map; //현재 맵 초기 지정
+        this.MAIN_Frame = frame;
 
-        repaint();
+        this.start_Map = stage_Map; //start_Map은 그대로 사용
+        this.current_Map = new StageMap(stage_Map); //current_Map은 복사해서 사용
 
         this.requestFocus();
         setFocusable(true); //초점 맞추기 하기
-        this.addKeyListener(this); //keylistener 추가
+        this.addKeyListener(this); //listener 추가
+
+        repaint();
     }
 
-    public void paintComponent(Graphics g) //다시 그리는 함수
+    //필드 상태를 초기 상태로 reset하는 함수
+    public void reset()
     {
-        //System.out.println(current_map.entityPos.get(0).getPosX() + " " + current_map.entityPos.get(0).getPosY());
-
-        // float scale = 1.0f;//scale 조정하기 구현 예정
-
-        BufferedImage image = null; //출력 객체
-
-        super.paintComponent(g);
-        g.setColor(Color.RED);
-
-        g.drawImage( G_Graphics.getImg(null, 0), 0, 0, null);
-
-        //iterator(반복 가능한 객체) 람다 식으로 작성
-        current_map.blockMap.forEach(((position, block) ->
-
-                g.drawImage(G_Graphics.getImg(block.getType(), block.getState()),
-                        (position.getPosX() * 85) + 55, (position.getPosY() * 90) + 1, null)
-        ));
-
-        //람다 식으로 앤티티 출력
-        for (int i = 0; i < current_map.entities.size(); i++)
-        {
-            g.drawImage(G_Graphics.getImg(current_map.entities.get(i).getType(), current_map.entities.get(i).getState()),
-                    (current_map.entityPos.get(i).getPosX() * 88) + 56, (current_map.entityPos.get(i).getPosY() * 95) + 1, null);
-        }
-
-
+        current_Map = new StageMap(start_Map); //초기로 되돌리기
     }
 
     @Override
     public void keyPressed(KeyEvent e)
     {
-        boolean temp = false;
+        boolean Turn_passed = false; //턴이 지나 갔는지 확인하는 변수
 
-        if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W)
+        //"Reset"
+        if (e.getKeyCode() == KeyEvent.VK_R)
         {
-           // System.out.println("Up");
-            temp = current_map.entities.getFirst().Move(current_map, current_map.entityPos.getFirst(), 0 );
+            reset();
+        }
+        // "Up"
+        else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W)
+        {
+            Turn_passed = current_Map.getPlayer().Move(current_Map, 0, 0 );
+        }
+        //"Down"
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D)
+        {
+            Turn_passed = current_Map.getPlayer().Move(current_Map, 0, 1 );
+        }
+        //"Left"
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)
+        {
+            Turn_passed = current_Map.getPlayer().Move(current_Map, 0, 2 );
+        }
+        //"Right"
+        else if  (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A)
+        {
+            Turn_passed = current_Map.getPlayer().Move(current_Map, 0, 3 );
+        }
 
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D)
-        {
-            //System.out.println("Down");
-            temp = current_map.entities.getFirst().Move(current_map, current_map.entityPos.getFirst(), 1 );
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)
-        {
-            //System.out.println("Left");
-            temp = current_map.entities.getFirst().Move(current_map, current_map.entityPos.getFirst(), 2 );
-
-        }
-        if  (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A)
-        {
-            //System.out.println("Right");
-            temp = current_map.entities.getFirst().Move(current_map, current_map.entityPos.getFirst(), 3 );
-        }
+        if (Turn_passed)
+            current_Map.turnEnd(); //턴 종료 수행
 
         repaint();
-
-        //if (temp == true)
-            //System.out.println(current_map.entityPos.getFirst().getPosX() + " " + current_map.entityPos.getFirst().getPosY());
     }
 
     @Override
@@ -96,4 +77,16 @@ public class Field extends JPanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {}
+
+    @Override
+    public void paintComponent(Graphics g) //다시 그리는 함수
+    {
+
+        super.paintComponent(g);
+
+        g.drawImage( G_Graphics.getImg(null, 0) , 0, 0, null); //필드 화면 그리기
+
+        current_Map.drawing(G_Graphics, g); //map class 안에서 그림 그리기 수행
+
+    }
 }

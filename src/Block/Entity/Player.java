@@ -4,7 +4,9 @@ import Block.Block;
 import Block.BlockType;
 import Block.BlockPosition;
 import Game.Field;
-import Game.Map;
+import Game.StageMap;
+
+import java.util.ArrayList;
 
 public class Player extends Entity
 {
@@ -13,33 +15,35 @@ public class Player extends Entity
         super(BlockType.Player);
     }
 
-
     @Override
-    public boolean Move(Map map, BlockPosition position, int direction)
+    public boolean Move(StageMap stageMap, int index, int direction)
     {
-        BlockPosition before = new BlockPosition(position.getPosX(),  position.getPosY()); //이전 좌표 저장
+        BlockPosition position = stageMap.getEntityPosByIndex(index); //첫번째 위치가 플레이어 위치
+        BlockPosition before = new BlockPosition(position); //이전 좌표 저장, 원본 객체 복사 생성
 
         //switch에 break 미사용 : 원하는 결과 나오지 않음
+        //break 시행 시 비교 문으로 작동하는 것 같음
         switch (direction)
         {
             case 0: //North
-                position.goUp();
+                position.moveTo(0,-1);
                 break;
 
             case 1: //East
-                position.goRight();
+                position.moveTo(1,0);
                 break;
 
             case 2: //South
-                position.goDown();
+                position.moveTo(0,1);
                 break;
 
             case 3: //West
-                position.goLeft();
+                position.moveTo(-1,0);
                 break;
         }
 
-       Block overlap = map.blockMap.getOrDefault(position, null); //이동시 만나는 블록
+        Block overlap = stageMap.getBlock(position); //이동시 만나는 블록
+        ArrayList<Entity> samePosEntity = stageMap.getEntity(position); //이동시 만나는 entity
 
         if (overlap != null) //만약 존재한다면
         {
@@ -50,16 +54,23 @@ public class Player extends Entity
             }
         } else
         {
-            for (int i = 1; i < map.entities.size(); i++) //모든 객체 확인
+            for (int i = 1; i < samePosEntity.size(); i++) //처음 객체 제외 모든 객체 확인
             {
-                if (map.entityPos.get(i).equals(position)) //해당 위치가 일치아면
+                if (samePosEntity.get(i).getState() >= 2) //만약 갈 수 없으면
                 {
-                    if (map.entities.get(i).getState() >= 2) //만약 갈 수 없으면
-                    {
                         position.setPos(before.getPosX(), before.getPosX());
                         return false; //움직이기 실패
-                    }
                 }
+            }
+        }
+
+        if (overlap != null)
+        {
+            overlap.collisionAct(type); //Block 충돌 처리 시행
+
+            for (int i = 1; i < samePosEntity.size(); i++) //Entity 충돌 처리 시행
+            {
+                samePosEntity.get(i).collisionAct(type); //Entity 충돌 처리
             }
         }
 
@@ -73,12 +84,15 @@ public class Player extends Entity
 
     }
 
+    //블록 복사하기
     @Override
-    public void turnEnd(boolean observed) //존재 할수도
+    public Entity Block_Copy()
     {
-
-
+        return new Player(); //새로운 player를 반환
     }
+
+    @Override
+    public void turnEnd(boolean observed) {} //존재 할수도
 
     @Override
     public void collisionAct(BlockType type) {} //존재 안함

@@ -1,5 +1,9 @@
 package Block;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+
 //block을 상속 받아서 Wall을 구현
 public class Wall extends Block
 {
@@ -16,7 +20,16 @@ public class Wall extends Block
         super(blocked, invisible, changedBlocked, changedInvisible, BlockType.Wall);
     }
 
+    //블록 복사하기
+    @Override
+    public Block Block_Copy()
+    {
+        return new Wall(this.blocked, this.invisible, this.changedBlocked, this.changedInvisible);
+    }
+
+
     //턴이 끝났을 시 수행하는 매서드
+    @Override
     public void turnEnd(boolean observed)
     {
         if (observed)
@@ -36,8 +49,6 @@ public class Wall extends Block
     }
 
     //해당 칸 도칙시 수행하는 매서드
+    @Override
     public void collisionAct(BlockType type) {}
-
-
-
 }
