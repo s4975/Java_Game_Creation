@@ -13,3 +13,5 @@
 11.30   : Player 움직이게 만들기
 
 12.09 : Player move sycle 구현
+
+12.17 : Lobey, Stage 화면 구현
