@@ -1,6 +1,8 @@
 package Main;
 
 import Game.Field;
+import Game.LayeredField;
+import Game.Sight;
 import Game.StageMap;
 import Lobby.Lobby;
 import StagePanel.StagePanel;
@@ -16,7 +18,7 @@ public class MainFrame extends JFrame
 
     String Game_Stage = ""; //현재 play 하고 있는 stage
 
-    boolean DeveloperMode = false; //개발자 모드
+    boolean DeveloperMode = true; //개발자 모드
 
     public MainFrame() //생성자
     {
@@ -39,16 +41,13 @@ public class MainFrame extends JFrame
             //외부 파일 명
             String fileName = "Stage/Stage1.obj";
 
-            //직렬화 할 객체
-            StageMap To_File = new StageMap();
-
             //객체 저장
-            SaveField(To_File, fileName);
+            SaveField(new StageMap(), fileName);
 
             //정보 받을 객체
             StageMap From_File = LoadField(fileName);
 
-            add(new Field(From_File, this));
+            new LayeredField(From_File, this); //레이어필드 생성
         }
 
         setVisible(true);
@@ -112,9 +111,8 @@ public class MainFrame extends JFrame
     public void changeToGamePanel(String stage)
     {
         Game_Stage = stage; //스테이지 설정
-        JPanel GamePanel = new Field(LoadField("Stage/" + stage + ".obj"), this); //스테이지 만들기
 
-        changePanel(GamePanel);
+        new LayeredField(LoadField("Stage/"+ stage + ".obj"), this); //레이어필드 생성
     }
 
     //Panel로 화면 바꾸는 함수

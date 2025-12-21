@@ -1,7 +1,5 @@
 package Game;
 
-import Main.MainFrame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -10,20 +8,33 @@ import java.awt.event.KeyListener;
 public class Field extends JPanel implements KeyListener {
 
     private final GameGraphics G_Graphics = new GameGraphics(); //그래픽 생성
-    private final MainFrame MAIN_Frame; //MainFrame 알기
+
+
 
     private final StageMap start_Map; //초기 맵
     private StageMap current_Map; //현재 맵
 
-    public Field(StageMap stage_Map, MainFrame frame)
+    private LayeredField layeredField; //겹쳐진 필드 받기
+    private Sight sight;
+
+    public Field(StageMap stage_Map, Sight player_Sight, LayeredField layeredField)
     {
-        this.MAIN_Frame = frame;
+
+        this.layeredField = layeredField; //부모 패널 알기
+        this.sight = player_Sight; //플레이어 시아 일기
 
         this.start_Map = stage_Map; //start_Map은 그대로 사용
         this.current_Map = new StageMap(stage_Map); //current_Map은 복사해서 사용
 
         this.setBackground(new Color(73, 73, 73));
         this.addKeyListener(this); //listener 추가
+
+        //해당 화면 초점 맞추기
+        this.requestFocus();
+        this.setFocusable(true);
+
+        repaint(); //다시 그리기
+        System.out.println("임시");
     }
 
     //필드 상태를 초기 상태로 reset하는 함수
@@ -76,7 +87,7 @@ public class Field extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {}
 
     @Override
-    public void paintComponent(Graphics g) //다시 그리는 함수
+    public void paint(Graphics g) //다시 그리기
     {
 
         super.paintComponent(g);
