@@ -12,9 +12,10 @@ public class Sight extends JPanel
 
     public Sight(StageMap map)
     {
-        this.setSize(1142, 643); //Field 크기와 같게 설정
+        this.setBounds(0, 0, 1124, 643);
         this.setBackground(new Color(0,0,0,0)); //무색 코드 지정
 
+        this.setOpaque(false); //투명한 레이어
         for (int x = 0; x < 7; x++)
         {
             for (int y = 0; y < 7; y++)
@@ -22,8 +23,6 @@ public class Sight extends JPanel
                 Player_Sight[x][y] = true; //배열 기본값 설정
             }
         }
-
-        repaint();
     }
 
     public void setPlayer_Sight()
@@ -51,10 +50,10 @@ public class Sight extends JPanel
         g.setColor(new Color(0, 0, 0, 200));
        // g.fillRect(0, 0, 1142, 643);
 
-        for (int x = 0; x < 11; x++)
+        for (int x = 0; x < 12; x++)
         {
             int X_pos = sight_X + x;
-            for (int y = 0; y < 6; y++)
+            for (int y = 0; y < 7; y++)
             {
                 int Y_pos = sight_Y + y;
 

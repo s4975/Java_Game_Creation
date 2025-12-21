@@ -26,15 +26,10 @@ public class Field extends JPanel implements KeyListener {
         this.start_Map = stage_Map; //start_Map은 그대로 사용
         this.current_Map = new StageMap(stage_Map); //current_Map은 복사해서 사용
 
+        this.setBounds(0, 0, 1200, 800);
         this.setBackground(new Color(73, 73, 73));
         this.addKeyListener(this); //listener 추가
 
-        //해당 화면 초점 맞추기
-        this.requestFocus();
-        this.setFocusable(true);
-
-        repaint(); //다시 그리기
-        System.out.println("임시");
     }
 
     //필드 상태를 초기 상태로 reset하는 함수
@@ -89,12 +84,14 @@ public class Field extends JPanel implements KeyListener {
     @Override
     public void paint(Graphics g) //다시 그리기
     {
+        //해당 화면 초점 맞추기
+        this.requestFocus();
+        this.setFocusable(true);
 
         super.paintComponent(g);
 
         g.drawImage( G_Graphics.getImg(null, 0) , 0, 0, null); //필드 화면 그리기
 
         current_Map.drawing(G_Graphics, g); //map class 안에서 그림 그리기 수행
-
     }
 }

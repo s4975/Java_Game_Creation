@@ -1,8 +1,6 @@
 package Main;
 
-import Game.Field;
 import Game.LayeredField;
-import Game.Sight;
 import Game.StageMap;
 import Lobby.Lobby;
 import StagePanel.StagePanel;
@@ -18,7 +16,7 @@ public class MainFrame extends JFrame
 
     String Game_Stage = ""; //현재 play 하고 있는 stage
 
-    boolean DeveloperMode = true; //개발자 모드
+    boolean DeveloperMode = false; //개발자 모드
 
     public MainFrame() //생성자
     {
@@ -47,7 +45,8 @@ public class MainFrame extends JFrame
             //정보 받을 객체
             StageMap From_File = LoadField(fileName);
 
-            new LayeredField(From_File, this); //레이어필드 생성
+            add (new LayeredField(From_File, this)); //새로운 LayeredField 생성
+
         }
 
         setVisible(true);
@@ -61,7 +60,7 @@ public class MainFrame extends JFrame
                 //파일 입출력을 연 다음, 객체 입출력을 시행
                 //해당 try catch문 수행 중에만 파일이 열려 있음
                 FileOutputStream fos = new FileOutputStream(file_name); //file output stream
-                ObjectOutputStream out = new ObjectOutputStream(fos); //object output stream
+                ObjectOutputStream out = new ObjectOutputStream(fos) //object output stream
         )
         {
             //직렬화 가능 객체를 바이트 스트림으로 변환, 파일에 저장
@@ -77,7 +76,7 @@ public class MainFrame extends JFrame
         try(
                 //파일 입출력을 연 다음, 객체 입출력을 시행
                 FileInputStream fis = new FileInputStream(file_name);
-                ObjectInputStream in = new ObjectInputStream(fis);
+                ObjectInputStream in = new ObjectInputStream(fis)
         )
         {
             return (StageMap) in.readObject();
@@ -110,15 +109,27 @@ public class MainFrame extends JFrame
     //현재 보여지는 화면을 GamePanel로 바꾼다.
     public void changeToGamePanel(String stage)
     {
-        Game_Stage = stage; //스테이지 설정
+        if (currentPanel != null)
+            remove (currentPanel); //현재 패널 삭제
+        currentPanel = null; //null로 설정
 
-        new LayeredField(LoadField("Stage/"+ stage + ".obj"), this); //레이어필드 생성
+        Game_Stage = stage; //스테이지 설정
+        //객체 직렬화 test
+
+        //정보 받을 객체
+        StageMap From_File = LoadField("Stage/" + stage + ".obj");
+
+        add (new LayeredField(From_File, this)); //새로운 LayeredField 생성
+
+        setVisible(true);
     }
 
     //Panel로 화면 바꾸는 함수
     private void changePanel(JPanel panel)
     {
-        remove(currentPanel); //현재 패널 제거
+        if (currentPanel != null)
+            remove(currentPanel); //현재 패널 제거
+
         currentPanel = panel; //Panel로 변경
         add(currentPanel); //다시 불러오기
 
