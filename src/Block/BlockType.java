@@ -5,5 +5,6 @@ public enum BlockType
 {
     Wall, //벽
     Trap,
+    Goal,
     Player //플레이어
 }

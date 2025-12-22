@@ -4,7 +4,7 @@ import Block.Block;
 import Block.BlockType;
 import Block.BlockPosition;
 import Game.Field;
-import Game.StageMap;
+import Game.Map_Storage;
 
 import java.util.ArrayList;
 
@@ -16,9 +16,9 @@ public class Player extends Entity
     }
 
     @Override
-    public boolean Move(StageMap stageMap, int index, int direction, Field field)
+    public boolean Move(Map_Storage mapStorage, int index, int direction, Field field)
     {
-        BlockPosition position = stageMap.getEntityPosByIndex(index); //첫번째 위치가 플레이어 위치
+        BlockPosition position = mapStorage.getEntityPosByIndex(index); //첫번째 위치가 플레이어 위치
         BlockPosition before = new BlockPosition(position); //이전 좌표 저장, 원본 객체 복사 생성
 
         //switch에 break 미사용 : 원하는 결과 나오지 않음
@@ -42,8 +42,8 @@ public class Player extends Entity
                 break;
         }
 
-        Block overlap = stageMap.getBlock(position); //이동시 만나는 블록
-        ArrayList<Entity> samePosEntity = stageMap.getEntity(position); //이동시 만나는 entity
+        Block overlap = mapStorage.getBlock(position); //이동시 만나는 블록
+        ArrayList<Entity> samePosEntity = mapStorage.getEntity(position); //이동시 만나는 entity
 
         if (overlap != null) //만약 존재한다면
         {

@@ -11,14 +11,14 @@ import java.awt.event.KeyListener;
 
 public class StagePanel extends JPanel implements ActionListener, KeyListener
 {
-    final int Max_stage = 2; //현재 제작한 스테이지 개수
+    final int Max_stage = 3; //현재 제작한 스테이지 개수
 
     MainFrame frame;
     JButton[] StageButton = new JButton[Max_stage]; //버튼 저장 객체
     JPanel Buttons = new JPanel(); //버튼들을 보여줄 JPanel
 
 
-    public StagePanel(MainFrame frame)
+    public StagePanel(MainFrame frame ,int Max_stage)
     {
         this.frame = frame;
 

@@ -2,7 +2,7 @@ package Block.Entity;
 
 import Block.*;
 import Game.Field;
-import Game.StageMap;
+import Game.Map_Storage;
 
 import java.io.Serializable;
 
@@ -20,5 +20,5 @@ public abstract class Entity extends Block implements Serializable //직렬화 �
     @Override
     public abstract Entity Block_Copy();
 
-    public abstract boolean Move(StageMap stageMap, int index, int direction,  Field field);
+    public abstract boolean Move(Map_Storage mapStorage, int index, int direction, Field field);
 }

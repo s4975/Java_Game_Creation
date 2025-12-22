@@ -65,7 +65,7 @@ public class BlockPosition implements Serializable, Comparator<BlockPosition> //
 
     //equals 매서드 오버라이팅
     //객체의 x, y좌표가 같다면 true, 다르다면 false를 반환
-    //Game.StageMap 기능을 사용하기 위해 오버라이딩을 사용함
+    //Game.Map_Storage 기능을 사용하기 위해 오버라이딩을 사용함
     //미 실시시 기본 object의 equal 함수 (주소값을 비교)를 불러와서 원하는 값을 얻을수가 없음
     @Override
     public boolean equals(Object o) {

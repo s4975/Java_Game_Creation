@@ -9,20 +9,22 @@ public class Field extends JPanel implements KeyListener {
 
     private final GameGraphics G_Graphics = new GameGraphics(); //그래픽 생성
 
-    private final StageMap start_Map; //초기 맵
-    private StageMap current_Map; //현재 맵
+    private final Map_Storage start_Map; //초기 맵
+    private Map_Storage current_Map; //현재 맵
 
     private LayeredField layeredField; //겹쳐진 필드 받기
     private final Sight sight;
 
-    public Field(StageMap stage_Map, Sight player_Sight, LayeredField layeredField)
+    boolean focused = true;
+
+    public Field(Map_Storage stage_Map, Sight player_Sight, LayeredField layeredField)
     {
 
         this.layeredField = layeredField; //부모 패널 알기
         this.sight = player_Sight; //플레이어 시아 일기
 
         this.start_Map = stage_Map; //start_Map은 그대로 사용
-        this.current_Map = new StageMap(stage_Map); //current_Map은 복사해서 사용
+        this.current_Map = new Map_Storage(stage_Map); //current_Map은 복사해서 사용
 
         sight.setMap(current_Map); //스테이지 맵 설정
 
@@ -35,9 +37,13 @@ public class Field extends JPanel implements KeyListener {
     //필드 상태를 초기 상태로 reset하는 함수
     public void reset()
     {
-        current_Map = new StageMap(start_Map); //초기로 되돌리기
+        current_Map = new Map_Storage(start_Map); //초기로 되돌리기
         sight.setMap(current_Map); //현재 맵으로 스테이지 재 설정
     }
+
+    public void fail() {layeredField.openFail();}
+
+    public void Success() {layeredField.openSuccess();}
 
     @Override
     public void keyPressed(KeyEvent e)
@@ -68,6 +74,10 @@ public class Field extends JPanel implements KeyListener {
         else if  (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A)
         {
             Turn_passed = current_Map.getPlayer().Move(current_Map, 0, 3 , this);
+        } //"Pause
+        else if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+            layeredField.openPause();
         }
 
         if (Turn_passed)
@@ -92,12 +102,22 @@ public class Field extends JPanel implements KeyListener {
     {
         //해당 화면 초점 맞추기
         this.requestFocus();
-        this.setFocusable(true);
+        this.setFocusable(focused);
 
         super.paintComponent(g);
 
         g.drawImage( G_Graphics.getImg(null, 0) , 0, 0, null); //필드 화면 그리기
 
         current_Map.drawing(G_Graphics, g); //map class 안에서 그림 그리기 수행
+    }
+
+    public void loseFocused()
+    {
+        focused = false;
+    }
+
+    public void getFocused()
+    {
+        focused = true;
     }
 }

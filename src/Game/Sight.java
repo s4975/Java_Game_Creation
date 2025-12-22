@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Sight extends JPanel
 {
     boolean[][] Player_Sight = new boolean[7][7]; //7*7 배열 생성, 가운데 [3][3]은 Player 위치, [x],[y]를 지칭
-    StageMap map;
+    Map_Storage map;
 
     public Sight()
     {
@@ -28,7 +28,7 @@ public class Sight extends JPanel
         }
     }
 
-    public void setMap(StageMap map)
+    public void setMap(Map_Storage map)
     {
         this.map = map; //stage map 재설정
         setPlayer_Sight();  //플레이어 시아 재 설정

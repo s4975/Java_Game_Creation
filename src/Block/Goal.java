@@ -2,23 +2,24 @@ package Block;
 
 import Game.Field;
 
-public class Trap extends Block
+public class Goal extends Block
 {
     //기본 생성자
-    public Trap()
-    { super(BlockType.Trap);}
+    public Goal()
+    { super(BlockType.Goal);}
 
     //생성자
-    public Trap(boolean blocked, boolean invisible,
+    public Goal(boolean blocked, boolean invisible,
                 boolean changedBlocked, boolean changedInvisible)
     {
-        super(blocked, invisible, changedBlocked, changedInvisible, BlockType.Trap);
+        super(blocked, invisible, changedBlocked, changedInvisible, BlockType.Goal);
     }
 
     //복사 생성
     @Override
-    public Block Block_Copy() {
-        return new Trap(this.blocked, this.invisible, this.changedBlocked, this.changedInvisible);
+    public Block Block_Copy()
+    {
+        return new Goal(this.blocked, this.invisible, this.changedBlocked, this.changedInvisible);
     }
 
     @Override
@@ -43,6 +44,6 @@ public class Trap extends Block
     @Override
     public void collisionAct(BlockType type, Field field)
     {
-        field.fail();
+        field.Success();
     }
 }

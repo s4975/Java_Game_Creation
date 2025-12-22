@@ -14,6 +14,7 @@ public class GameGraphics {
     final private BufferedImage img_Field; //필드 사진을 담는 변수
     final private BufferedImage[] img_Wall = new BufferedImage[4]; //벽 상태를 받는 변수
     final private BufferedImage[] img_Trap = new BufferedImage[4]; //벽 상태를 받는 변수
+    final private BufferedImage[] img_Goal = new BufferedImage[4]; //벽 상태를 받는 변수
     final private BufferedImage img_Player; //플레이어 이미지
 
 
@@ -27,6 +28,11 @@ public class GameGraphics {
             img_Wall[1] = ImageIO.read(new File("Graphic/Wall_1.png")); //안개 사진
             img_Wall[2] = ImageIO.read(new File("Graphic/Wall_2.png")); //유리 사진
             img_Wall[3] = ImageIO.read(new File("Graphic/Wall_3.png")); //벽 사진
+
+            img_Goal[0] = ImageIO.read(new File("Graphic/Goal_0.png"));
+            img_Goal[1] = ImageIO.read(new File("Graphic/Goal_1.png"));
+            img_Goal[2] = ImageIO.read(new File("Graphic/Goal_2.png"));
+            img_Goal[3] = ImageIO.read(new File("Graphic/Goal_3.png"));
 
             img_Trap[0] = ImageIO.read(new File("Graphic/Trap_0.png"));
             img_Trap[1] = ImageIO.read(new File("Graphic/Trap_1.png")); //안개 사진
@@ -48,7 +54,6 @@ public class GameGraphics {
     {
         switch (type)
         {
-
             case Wall:
                 if (statement >= 0 && statement < 4)
                     return img_Wall[statement]; //현재 상태 wall을 반환
@@ -59,6 +64,11 @@ public class GameGraphics {
             case Trap:
                 if (statement >= 0 && statement < 4)
                     return img_Trap[statement]; //현재 상태 wall을 반환
+                break;
+
+            case Goal:
+                if (statement >= 0 && statement < 4)
+                    return img_Goal[statement]; //현재 상태 wall을 반환
                 break;
 
             case null : return img_Field;

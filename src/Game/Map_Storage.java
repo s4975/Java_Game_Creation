@@ -4,14 +4,13 @@ package Game;
 
 import Block.*;
 import Block.Entity.Entity;
-import Block.Entity.Player;
 
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class StageMap implements Serializable //직렬화 가능
+public class Map_Storage implements Serializable //직렬화 가능
 {
     //Block.Block: 모든 블록의 부모 역활
     //Block.Entity: 모든 Entity의 부모 역활
@@ -21,19 +20,19 @@ public class StageMap implements Serializable //직렬화 가능
     protected ArrayList<Entity> entities = new ArrayList<>(); //entity 객체
 
 
-    public StageMap() {} //기본생성자
+    public Map_Storage() {} //기본생성자
 
-    public StageMap(int stage)
+    public Map_Storage(int stage)
     {
-        NewStage newStage = new NewStage(stage);
+        New_Map newStage = new New_Map(stage);
 
         blockMap = newStage.GetBlockMap();
         entityPos = newStage.GetEntityPos();
-        entities = newStage.getentities();
+        entities = newStage.entities();
     }
 
     //객체 복사 생성자
-    public StageMap(final StageMap copied)
+    public Map_Storage(final Map_Storage copied)
     {
         //for each문으로 전체를 복사
         copied.blockMap.forEach((blockPos, block) ->
