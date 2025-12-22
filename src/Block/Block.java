@@ -1,6 +1,8 @@
 package Block;
 //블록 위치의 경우 Map으로 설정
 
+import Game.Field;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -71,7 +73,7 @@ public abstract class Block implements Serializable //직렬화 가능
     public abstract void turnEnd(boolean observed); //관찰된 상태인지
 
     //같은 칸 도달시 해야할 일
-    public abstract void collisionAct(BlockType type);
+    public abstract void collisionAct(BlockType type, Field field);
 
 
 

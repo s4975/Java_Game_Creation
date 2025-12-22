@@ -4,6 +4,7 @@ package Game;
 
 import Block.*;
 import Block.Entity.Entity;
+import Block.Entity.Player;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -78,6 +79,11 @@ public class StageMap implements Serializable //직렬화 가능
         return entityPos.get(index);
     }
 
+    public int getEntityCount()
+    {
+        return entities.size();
+    }
+
 
     public Entity getPlayer() //플레이어 객체 (entity중 처음에 있는 객체) 반환
     {
@@ -98,7 +104,6 @@ public class StageMap implements Serializable //직렬화 가능
                         (position.getPosX() * 85) + 60, (position.getPosY() * 87) + 20, null)
         ));
 
-        //람다 식으로 앤티티 출력
         for (int i = 0; i < entities.size(); i++)
         {
             g.drawImage(graphics.getImg(entities.get(i).getType(), entities.get(i).getState()),
@@ -106,16 +111,38 @@ public class StageMap implements Serializable //직렬화 가능
         }
     }
 
-    public void turnEnd()
+    public void turnEnd(boolean[][] Player_Sight)
     {
+        //7*7 배열
+        BlockPosition player_pos = getPlayerPos(); //플레이어 위치 받기
+
         //BlockMap의 종료 동작을 시행
         blockMap.forEach(((position, block) ->
-                block.turnEnd(false) //turn end를 수행
+                Turn_End_Act(Player_Sight, player_pos, position, block)
         ));
 
+        int i = 0;
         //Entity의 종료 동작을 시행
         entities.forEach(entity ->
-                entity.turnEnd(false) //turn end를 수행
-        );
+        {
+            BlockPosition entity_pos = getEntityPosByIndex(i); //위치 얻기
+
+            Turn_End_Act(Player_Sight, player_pos, entity_pos, entity);
+        });
+
+
+    }
+
+    private void Turn_End_Act(boolean[][] Player_Sight, BlockPosition player_pos, BlockPosition position, Block block)
+    {
+        int x =  player_pos.getPosX() - position.getPosX() + 3; //시아 배열에서의 x 좌표
+        int y = player_pos.getPosY() - position.getPosY() + 3; //시아 배열에서의 y 좌표
+
+        if (x < 0 || x >= 7 || y < 0 || y >= 7) //좌표 밖이라면
+            block.turnEnd(false);//turn end를 수행
+        else block.turnEnd(Player_Sight[x][y]); //수행
     }
 }
+
+
+

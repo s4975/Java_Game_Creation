@@ -1,5 +1,7 @@
 package Block;
 
+import Game.Field;
+
 //block을 상속 받아서 Wall을 구현
 public class Wall extends Block
 {
@@ -46,5 +48,5 @@ public class Wall extends Block
 
     //해당 칸 도칙시 수행하는 매서드
     @Override
-    public void collisionAct(BlockType type) {}
+    public void collisionAct(BlockType type,  Field field) {}
 }

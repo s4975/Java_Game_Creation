@@ -16,7 +16,7 @@ public class MainFrame extends JFrame
 
     String Game_Stage = ""; //현재 play 하고 있는 stage
 
-    boolean DeveloperMode = false; //개발자 모드
+    boolean DeveloperMode = true; //개발자 모드
 
     public MainFrame() //생성자
     {
@@ -37,18 +37,20 @@ public class MainFrame extends JFrame
         {
             //여러 map 객체 파일로 저장 시 for문으로 저장, 로드 되는지 확인하는 과정으로 하면 됨
 
-            //객체 직렬화 test
-            //외부 파일 명
-            String fileName = "Stage/Stage2.obj";
+            int i = 3;
+            //for (int i = 1; i <= 2; i++) {
+                //객체 직렬화 test
+                //외부 파일 명
+                String fileName = "Stage/Stage" + i + ".obj";
 
-            //객체 저장
-            SaveField(new StageMap(2), fileName);
+                //객체 저장
+                SaveField(new StageMap(i), fileName);
 
-            //정보 받을 객체
-            StageMap From_File = LoadField(fileName);
+                //정보 받을 객체
+                StageMap From_File = LoadField(fileName);
 
-            add (new LayeredField(From_File, this)); //새로운 LayeredField 생성
-
+                add(new LayeredField(From_File, this)); //새로운 LayeredField 생성
+            //}
         }
 
         setVisible(true);
@@ -87,13 +89,6 @@ public class MainFrame extends JFrame
             throw new RuntimeException(e);
         }
 
-    }
-
-    private void SaveGame(String file_name)
-    {
-    }
-    private void LoadGame(String file_name)
-    {
     }
 
     //현재 보여지는 화면을 Field로 바꾼다.

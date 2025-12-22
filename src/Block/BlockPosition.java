@@ -1,9 +1,10 @@
 package Block;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Objects;
 
-public class BlockPosition implements Serializable //직렬화 가능
+public class BlockPosition implements Serializable, Comparator<BlockPosition> //직렬화 가능
 {
     //X, Y의 위치
     private int posX; //x 죄표 (0~11)
@@ -50,6 +51,16 @@ public class BlockPosition implements Serializable //직렬화 가능
         this.posY += dy;
         if (this.posY < 0) this.posY = 0; //0보다 작으면 0으로
         if (this.posY > 6) this.posY = 6; //6보다 크면 6으로
+    }
+
+    @Override
+    public int compare(BlockPosition o1, BlockPosition o2)
+    {
+        if (o1.posX == o2.posX) //posX가 서로 같다면
+        {
+            return o1.posY - o2.posY; //Y 좌표 비교
+        }
+        else return o1.posX - o2.posX; //아니면 X좌표 비교
     }
 
     //equals 매서드 오버라이팅

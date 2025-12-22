@@ -16,7 +16,7 @@ public class Player extends Entity
     }
 
     @Override
-    public boolean Move(StageMap stageMap, int index, int direction)
+    public boolean Move(StageMap stageMap, int index, int direction, Field field)
     {
         BlockPosition position = stageMap.getEntityPosByIndex(index); //첫번째 위치가 플레이어 위치
         BlockPosition before = new BlockPosition(position); //이전 좌표 저장, 원본 객체 복사 생성
@@ -66,11 +66,11 @@ public class Player extends Entity
 
         if (overlap != null)
         {
-            overlap.collisionAct(type); //Block 충돌 처리 시행
+            overlap.collisionAct(type, field); //Block 충돌 처리 시행
 
             for (int i = 1; i < samePosEntity.size(); i++) //Entity 충돌 처리 시행
             {
-                samePosEntity.get(i).collisionAct(type); //Entity 충돌 처리
+                samePosEntity.get(i).collisionAct(type, field); //Entity 충돌 처리
             }
         }
 
@@ -89,7 +89,7 @@ public class Player extends Entity
     public void turnEnd(boolean observed) {} //존재 할수도
 
     @Override
-    public void collisionAct(BlockType type) {} //존재 안함
+    public void collisionAct(BlockType type, Field field) {} //존재 안함
 
 }
 

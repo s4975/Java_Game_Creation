@@ -4,5 +4,6 @@ package Block;
 public enum BlockType
 {
     Wall, //벽
+    Trap,
     Player //플레이어
 }

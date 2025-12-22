@@ -29,8 +29,18 @@ public class LayeredField extends JLayeredPane
         repaint();
     }
 
-    public void repainting()
+    public void GotoStagePanel()
     {
-        repaint();
+
+
+    }
+
+    public void GotoLobbyPanel()
+    {
+
+    }
+    public void GotoNextPanel()
+    {
+
     }
 }

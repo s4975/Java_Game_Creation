@@ -13,6 +13,7 @@ public class GameGraphics {
     //그래픽을 저장하고 있는
     final private BufferedImage img_Field; //필드 사진을 담는 변수
     final private BufferedImage[] img_Wall = new BufferedImage[4]; //벽 상태를 받는 변수
+    final private BufferedImage[] img_Trap = new BufferedImage[4]; //벽 상태를 받는 변수
     final private BufferedImage img_Player; //플레이어 이미지
 
 
@@ -26,6 +27,11 @@ public class GameGraphics {
             img_Wall[1] = ImageIO.read(new File("Graphic/Wall_1.png")); //안개 사진
             img_Wall[2] = ImageIO.read(new File("Graphic/Wall_2.png")); //유리 사진
             img_Wall[3] = ImageIO.read(new File("Graphic/Wall_3.png")); //벽 사진
+
+            img_Trap[0] = ImageIO.read(new File("Graphic/Trap_0.png"));
+            img_Trap[1] = ImageIO.read(new File("Graphic/Trap_1.png")); //안개 사진
+            img_Trap[2] = ImageIO.read(new File("Graphic/Trap_2.png")); //유리 사진
+            img_Trap[3] = img_Wall[3]; //벽 사진
 
             img_Player = ImageIO.read(new File("Graphic/Player.png")); //플레이어 사진
 
@@ -46,10 +52,14 @@ public class GameGraphics {
             case Wall:
                 if (statement >= 0 && statement < 4)
                     return img_Wall[statement]; //현재 상태 wall을 반환
-
                 break;
 
             case Player: return img_Player; //player 이미지를 반환
+
+            case Trap:
+                if (statement >= 0 && statement < 4)
+                    return img_Trap[statement]; //현재 상태 wall을 반환
+                break;
 
             case null : return img_Field;
         }

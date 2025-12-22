@@ -8,6 +8,7 @@ import Block.BlockPosition;
 import Block.Entity.Entity;
 import Block.Entity.Player;
 import Block.Wall;
+import Block.Trap;
 
 public class NewStage extends StageMap
 {
@@ -34,6 +35,16 @@ public class NewStage extends StageMap
                 entityPos.add(new BlockPosition(0,5));
                 entities.add(new Player());
                 break;
+
+            case 3:
+                for (int i = 0; i < 7; i++)
+                    blockMap.put(new BlockPosition(4,i), new Wall(false, false, true, false));
+
+                blockMap.put(new BlockPosition(0,6), new Trap(true, false, true, false));
+                blockMap.put(new BlockPosition(5,7), new Trap());
+
+                entityPos.add(new BlockPosition(0,0));
+                entities.add(new Player());
         }
     }
 
