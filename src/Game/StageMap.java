@@ -4,7 +4,6 @@ package Game;
 
 import Block.*;
 import Block.Entity.Entity;
-import Block.Entity.Player;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -15,16 +14,21 @@ public class StageMap implements Serializable //직렬화 가능
 {
     //Block.Block: 모든 블록의 부모 역활
     //Block.Entity: 모든 Entity의 부모 역활
-    private final HashMap<BlockPosition, Block> blockMap = new HashMap<BlockPosition, Block>();
+    protected HashMap<BlockPosition, Block> blockMap = new HashMap<BlockPosition, Block>();
 
-    private final ArrayList<BlockPosition> entityPos = new ArrayList<BlockPosition>(); //entity 위치
-    private final ArrayList<Entity> entities = new ArrayList<>(); //entity 객체
+    protected ArrayList<BlockPosition> entityPos = new ArrayList<BlockPosition>(); //entity 위치
+    protected ArrayList<Entity> entities = new ArrayList<>(); //entity 객체
 
+
+    public StageMap() {} //기본생성자
 
     public StageMap(int stage)
     {
+        NewStage newStage = new NewStage(stage);
 
-        setting(stage);
+        blockMap = newStage.GetBlockMap();
+        entityPos = newStage.GetEntityPos();
+        entities = newStage.getentities();
     }
 
     //객체 복사 생성자
@@ -39,25 +43,6 @@ public class StageMap implements Serializable //직렬화 가능
 
         copied.entities.forEach(entity
                 -> this.entities.add(entity.Block_Copy())); //새로운 객체 생성, 복사해서 저장
-    }
-
-
-    //초기 세팅
-    private void setting(int stage)
-    {
-        switch (stage)
-        {
-            case 1:
-                //초기 필드 상태 대입 예정
-                blockMap.put(new BlockPosition(0,0), new Wall(true, true, true, false));
-                blockMap.put(new BlockPosition(2,2), new Wall(true, true, false, true));
-                blockMap.put(new BlockPosition(3,5), new Wall(true, true, true, false));
-                blockMap.put(new BlockPosition(7,9), new Wall() );
-
-                entityPos.add(new BlockPosition(6,7));
-                entities.add(new Player());
-
-        }
     }
 
     public Block getBlock(BlockPosition position) //특정 위치의 블록을 얻는 코드

@@ -3,7 +3,6 @@ package Game;
 import Main.MainFrame;
 
 import javax.swing.*;
-import java.awt.*;
 
 //필드를 서로 겹치기 위해 생성한 또 다른 panel
 public class LayeredField extends JLayeredPane

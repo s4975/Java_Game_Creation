@@ -16,7 +16,7 @@ public class MainFrame extends JFrame
 
     String Game_Stage = ""; //현재 play 하고 있는 stage
 
-    boolean DeveloperMode = true; //개발자 모드
+    boolean DeveloperMode = false; //개발자 모드
 
     public MainFrame() //생성자
     {
@@ -39,10 +39,10 @@ public class MainFrame extends JFrame
 
             //객체 직렬화 test
             //외부 파일 명
-            String fileName = "Stage/Stage1.obj";
+            String fileName = "Stage/Stage2.obj";
 
             //객체 저장
-            SaveField(new StageMap(1), fileName);
+            SaveField(new StageMap(2), fileName);
 
             //정보 받을 객체
             StageMap From_File = LoadField(fileName);
