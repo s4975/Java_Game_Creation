@@ -1,7 +1,8 @@
-package Game;
+package Game.Panel;
 
 import Block.Block;
 import Block.BlockPosition;
+import Game.Map_Storage;
 
 import javax.swing.*;
 import java.awt.*;

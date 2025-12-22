@@ -1,26 +1,25 @@
-package Game;
+package Game.Panel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Success extends JPanel implements ActionListener
+public class Fail extends JPanel implements ActionListener
 {
     LayeredField layer; //layer 가져오기
 
-    JButton[] Buttons = new JButton[4]; //버튼 저장
+    JButton[] Buttons = new JButton[3]; //버튼 저장
 
-    public Success(LayeredField layer)
+    public Fail(LayeredField layer)
     {
         this.layer = layer; //레이어
-        this.setLayout(new GridLayout(5,0,10,10)); //레이아웃
+        this.setLayout(new GridLayout(4,0,10,10)); //레이아웃
         this.setBackground(new Color(73,73,73,100)); //배경색 지정
-        this.setOpaque(false); //투명한 레이어
-        this.setBounds(300, 150, 554, 343); //경계 지정
+        this.setBounds(200, 200, 800, 400); //경계 지정
 
         //JLabel 설정
-        JLabel UpText = new JLabel("스테이지를 클리어 했습니다.");
+        JLabel UpText = new JLabel("스테이지를 클리어하지 못했습니다.");
 
         UpText.setFont(new Font("Monospaced", Font.BOLD, 30)); //폰트 설정
         UpText.setForeground(Color.white); //글자 색상 변경
@@ -28,18 +27,16 @@ public class Success extends JPanel implements ActionListener
 
         add(UpText); //추가
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             switch(i)
             {
                 case 0:
-                    Buttons[0] = new JButton("다음 스테이지로"); break;
+                    Buttons[0] = new JButton("다시 시도"); break;
                 case 1:
                     Buttons[1] = new JButton("스테이지 목록으로");  break;
                 case 2:
-                    Buttons[2] = new JButton("다시 시도"); break;
-                case 3:
-                    Buttons[3] = new JButton("게임 종료"); break;
+                    Buttons[2] = new JButton("게임 종료"); break;
             }
 
             Buttons[i].addActionListener(this); //ActionListener 지정
@@ -55,26 +52,20 @@ public class Success extends JPanel implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if  (e.getSource() == Buttons[0]) //다음 스테이지로
-        {
-            layer.GotoNextPanel();
-        }
-
-        if (e.getSource() == Buttons[1]) //스테이지 목록으로
-        {
-            layer.GotoStagePanel();
-        }
-
-        if (e.getSource() == Buttons[2]) //다시 시도
+        if  (e.getSource() == Buttons[0]) //다시 시작"
         {
             layer.GotoCurrentPanel(this);
         }
 
-        if (e.getSource() == Buttons[3]) //게임 종료
+        if (e.getSource() == Buttons[1]) //스테이지로
+        {
+            layer.GotoStagePanel();
+        }
+
+        if (e.getSource() == Buttons[2]) //게임 종료
         {
             layer.GotoLobbyPanel();
         }
     }
 }
-
 

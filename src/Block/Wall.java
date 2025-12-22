@@ -1,6 +1,6 @@
 package Block;
 
-import Game.Field;
+import Game.Panel.Field;
 
 //block을 상속 받아서 Wall을 구현
 public class Wall extends Block

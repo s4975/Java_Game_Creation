@@ -4,6 +4,7 @@ package Game;
 
 import Block.*;
 import Block.Entity.Entity;
+import Game.Panel.GameGraphics;
 
 import java.awt.*;
 import java.io.Serializable;

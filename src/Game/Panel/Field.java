@@ -1,4 +1,6 @@
-package Game;
+package Game.Panel;
+
+import Game.Map_Storage;
 
 import javax.swing.*;
 import java.awt.*;

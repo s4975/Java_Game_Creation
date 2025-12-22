@@ -1,7 +1,7 @@
 package Block.Entity;
 
 import Block.*;
-import Game.Field;
+import Game.Panel.Field;
 import Game.Map_Storage;
 
 import java.io.Serializable;

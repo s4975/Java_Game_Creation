@@ -1,9 +1,11 @@
-package Game;
+package Game.Panel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Pause extends JPanel implements ActionListener
 {
@@ -16,8 +18,7 @@ public class Pause extends JPanel implements ActionListener
         this.layer = layer; //레이어
         this.setLayout(new GridLayout(5,0,10,10)); //레이아웃
         this.setBackground(new Color(73,73,73,100)); //배경색 지정
-        this.setOpaque(false); //투명한 레이어
-        this.setBounds(300, 150, 524, 343); //경계 지정
+        this.setBounds(200, 200, 800, 400); //경계 지정
 
         //JLabel 설정
         JLabel UpText = new JLabel("일시 정지");

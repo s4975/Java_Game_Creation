@@ -3,7 +3,7 @@ package Block.Entity;
 import Block.Block;
 import Block.BlockType;
 import Block.BlockPosition;
-import Game.Field;
+import Game.Panel.Field;
 import Game.Map_Storage;
 
 import java.util.ArrayList;

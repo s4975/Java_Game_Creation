@@ -1,5 +1,6 @@
-package Game;
+package Game.Panel;
 
+import Game.Map_Storage;
 import Main.MainFrame;
 
 import javax.swing.*;
@@ -55,11 +56,11 @@ public class LayeredField extends JLayeredPane
         field.loseFocused(); //필드의 초점 해제
         panel.setVisible(true); //보이게끔 설정
 
+        repaint(); //다시 그리기
+
         //해당 화면 초점 맞추기
         panel.requestFocus();
         panel.setFocusable(true);
-
-        repaint(); //다시 그리기
     }
 
     void closeCom(JPanel panel)

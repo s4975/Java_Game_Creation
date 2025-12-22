@@ -1,4 +1,4 @@
-package Game;
+package Game.Panel;
 
 import Block.BlockType;
 

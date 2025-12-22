@@ -1,12 +1,8 @@
 package Block;
 //블록 위치의 경우 Map으로 설정
 
-import Game.Field;
+import Game.Panel.Field;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 
 //변수 좌표와 성질을 저장하는 구조체

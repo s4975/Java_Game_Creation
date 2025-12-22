@@ -1,6 +1,6 @@
 package Main;
 
-import Game.LayeredField;
+import Game.Panel.LayeredField;
 import Game.Map_Storage;
 import Lobby.Lobby;
 import StagePanel.StagePanel;

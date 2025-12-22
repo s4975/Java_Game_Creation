@@ -1,6 +1,6 @@
 package Block;
 
-import Game.Field;
+import Game.Panel.Field;
 
 public class Goal extends Block
 {
