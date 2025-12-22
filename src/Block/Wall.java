@@ -1,9 +1,5 @@
 package Block;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-
 //block을 상속 받아서 Wall을 구현
 public class Wall extends Block
 {

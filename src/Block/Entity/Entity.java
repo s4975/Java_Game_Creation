@@ -21,6 +21,4 @@ public abstract class Entity extends Block implements Serializable //직렬화 �
     public abstract Entity Block_Copy();
 
     public abstract boolean Move(StageMap stageMap, int index, int direction);
-
-    public abstract void Vision(Field field); //시아 각도
 }

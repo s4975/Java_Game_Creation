@@ -78,12 +78,6 @@ public class Player extends Entity
 
     }
 
-    @Override
-    public void Vision(Field field) //구현 준비중
-    {
-
-    }
-
     //블록 복사하기
     @Override
     public Entity Block_Copy()

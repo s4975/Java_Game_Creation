@@ -19,7 +19,7 @@ public class LayeredField extends JLayeredPane
 
         this.setOpaque(false);
 
-        Sight temp = new Sight(stage_Map);
+        Sight temp = new Sight();
 
         Field temp2 =  new Field(stage_Map, temp,  this);
 
@@ -27,6 +27,11 @@ public class LayeredField extends JLayeredPane
         add(temp, (Integer)2);
 
         revalidate();
+        repaint();
+    }
+
+    public void repainting()
+    {
         repaint();
     }
 }

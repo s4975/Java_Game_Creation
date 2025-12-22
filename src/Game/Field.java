@@ -15,7 +15,7 @@ public class Field extends JPanel implements KeyListener {
     private StageMap current_Map; //현재 맵
 
     private LayeredField layeredField; //겹쳐진 필드 받기
-    private Sight sight;
+    private final Sight sight;
 
     public Field(StageMap stage_Map, Sight player_Sight, LayeredField layeredField)
     {
@@ -25,6 +25,8 @@ public class Field extends JPanel implements KeyListener {
 
         this.start_Map = stage_Map; //start_Map은 그대로 사용
         this.current_Map = new StageMap(stage_Map); //current_Map은 복사해서 사용
+
+        sight.setStage_Map(current_Map); //스테이지 맵 설정
 
         this.setBounds(0, 0, 1200, 800);
         this.setBackground(new Color(73, 73, 73));
@@ -36,6 +38,7 @@ public class Field extends JPanel implements KeyListener {
     public void reset()
     {
         current_Map = new StageMap(start_Map); //초기로 되돌리기
+        sight.setStage_Map(current_Map); //현재 맵으로 스테이지 재 설정
     }
 
     @Override
@@ -70,7 +73,11 @@ public class Field extends JPanel implements KeyListener {
         }
 
         if (Turn_passed)
+        {
+            System.out.println("필드 좌표 : " + current_Map.getPlayerPos().getPosX() + ',' + current_Map.getPlayerPos().getPosY());
             current_Map.turnEnd(); //턴 종료 수행
+            sight.setPlayer_Sight(); //플레이어 시아 재 설정
+        }
 
         repaint();
     }

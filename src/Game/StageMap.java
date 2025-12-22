@@ -21,9 +21,10 @@ public class StageMap implements Serializable //직렬화 가능
     private final ArrayList<Entity> entities = new ArrayList<>(); //entity 객체
 
 
-    public StageMap()
+    public StageMap(int stage)
     {
-        setting();
+
+        setting(stage);
     }
 
     //객체 복사 생성자
@@ -42,16 +43,21 @@ public class StageMap implements Serializable //직렬화 가능
 
 
     //초기 세팅
-    private void setting()
+    private void setting(int stage)
     {
-        //초기 필드 상태 대입 예정
-        blockMap.put(new BlockPosition(0,0), new Wall(true, true, true, false));
-        blockMap.put(new BlockPosition(2,2), new Wall(true, true, false, true));
-        blockMap.put(new BlockPosition(3,5), new Wall(true, true, true, false));
-        blockMap.put(new BlockPosition(7,9), new Wall() );
+        switch (stage)
+        {
+            case 1:
+                //초기 필드 상태 대입 예정
+                blockMap.put(new BlockPosition(0,0), new Wall(true, true, true, false));
+                blockMap.put(new BlockPosition(2,2), new Wall(true, true, false, true));
+                blockMap.put(new BlockPosition(3,5), new Wall(true, true, true, false));
+                blockMap.put(new BlockPosition(7,9), new Wall() );
 
-        entityPos.add(new BlockPosition(6,7));
-        entities.add(new Player());
+                entityPos.add(new BlockPosition(6,7));
+                entities.add(new Player());
+
+        }
     }
 
     public Block getBlock(BlockPosition position) //특정 위치의 블록을 얻는 코드
@@ -91,6 +97,11 @@ public class StageMap implements Serializable //직렬화 가능
     public Entity getPlayer() //플레이어 객체 (entity중 처음에 있는 객체) 반환
     {
         return entities.getFirst(); //처음 요소 반환
+    }
+
+    public BlockPosition getPlayerPos()
+    {
+        return entityPos.getFirst(); //처음 요소 반환
     }
 
     public void drawing(GameGraphics graphics, Graphics g)
