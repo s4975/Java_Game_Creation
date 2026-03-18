@@ -10,7 +10,7 @@ import java.io.*;
 
 public class MainFrame extends JFrame
 {
-    final int Max_stage = 3; //최대 스테이지 갯수
+    final int Max_stage = 4; //최대 스테이지 갯수
 
     JPanel currentPanel; //현재 화면에 보여지고 있는 패널
     JPanel StagePanel; //스테이지 페널
@@ -38,6 +38,7 @@ public class MainFrame extends JFrame
         if (DeveloperMode) //개발자 코드
         {
             //여러 map 객체 파일로 저장 시 for문으로 저장, 로드 되는지 확인하는 과정으로 하면 됨
+            Map_Storage From_File = null;
 
             //int i = 1;
             for (int i = 1; i <= Max_stage; i++) {
@@ -49,10 +50,13 @@ public class MainFrame extends JFrame
                 SaveField(new Map_Storage(i), fileName);
 
                 //정보 받을 객체
-                Map_Storage From_File = LoadField(fileName);
+                if (i == 1)
+                    From_File = LoadField(fileName);
 
-                //add(new LayeredField(From_File, this)); //새로운 LayeredField 생성
+
             }
+
+            add(new LayeredField(From_File, this)); //새로운 LayeredField 생성
         }
 
         setVisible(true);

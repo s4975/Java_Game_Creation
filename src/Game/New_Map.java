@@ -14,14 +14,34 @@ public class New_Map extends Map_Storage
         {
             case 1:
                 //초기 필드 상태 대입 예정
-                blockMap.put(new BlockPosition(0,0), new Wall(true, true, true, false));
-                blockMap.put(new BlockPosition(2,2), new Wall(true, true, false, true));
-                blockMap.put(new BlockPosition(3,5), new Wall(true, true, true, false));
-                blockMap.put(new BlockPosition(7,9), new Wall() );
+                for (int i = 0; i < 7; i++)
+                {
+                    blockMap.put(new BlockPosition(0,i), new Wall(true, true, false, false));
+                    blockMap.put(new BlockPosition(11,i), new Wall(true, true, false, false));
+                }
+               for (int i = 1; i < 11; i++)
+               {
+                   blockMap.put(new BlockPosition(i,0), new Wall(true, true, false, false));
+                   blockMap.put(new BlockPosition(i,6), new Wall(true, true, false, false));
 
-                blockMap.put(new BlockPosition(8,1), new Goal(true, true, true, true));
+                   if (i % 2 == 0)
+                   {
+                       blockMap.put(new BlockPosition(i,1), new Wall(false, false, true, false));
+                       blockMap.put(new BlockPosition(i,5), new Wall(false, false, true, false));
+                   }
+                   else
+                   {
+                       blockMap.put(new BlockPosition(i,1), new Wall(true, false, true, false));
+                       blockMap.put(new BlockPosition(i,5), new Wall(true, false, true, false));
+                   }
+               }
 
-                entityPos.add(new BlockPosition(6,7));
+
+
+
+               blockMap.put(new BlockPosition(9,2), new Goal(false, false, false, false));
+
+                entityPos.add(new BlockPosition(2,3));
                 entities.add(new Player());
                 break;
 
@@ -29,10 +49,10 @@ public class New_Map extends Map_Storage
                 for (int i = 0; i < 12; i++)
                     for (int j = 0; j < 7; j++)
                     {
-                        blockMap.put(new BlockPosition(i, j), new Wall(false, true, true, false));
+                        blockMap.put(new BlockPosition(i, j), new Wall(false, false, true, false));
                         if (i == 11 && j == 6)
                         {
-                            blockMap.put(new BlockPosition(11,6), new Goal(false,true, true, false));
+                            blockMap.put(new BlockPosition(11,6), new Goal(false,false, true, false));
                         }
                     }
 
@@ -40,7 +60,23 @@ public class New_Map extends Map_Storage
                 entities.add(new Player());
                 break;
 
+
             case 3:
+                for (int i = 0; i < 12; i++)
+                    for (int j = 0; j < 7; j++)
+                    {
+                        blockMap.put(new BlockPosition(i, j), new Wall(false, false, true, false));
+                        if (i == 11 && j == 6)
+                        {
+                            blockMap.put(new BlockPosition(11,6), new Goal(false,false, true, false));
+                        }
+                    }
+
+                entityPos.add(new BlockPosition(0,5));
+                entities.add(new Player());
+                break;
+
+            case 4:
                 for (int i = 0; i < 7; i++)
                     blockMap.put(new BlockPosition(4,i), new Wall(false, false, true, true));
 
