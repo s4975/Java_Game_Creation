@@ -18,7 +18,7 @@ public class MainFrame extends JFrame
 
     String Game_Stage = ""; //현재 play 하고 있는 stage
 
-    boolean DeveloperMode = false; //개발자 모드
+    boolean DeveloperMode = true; //개발자 모드
 
     public MainFrame() //생성자
     {
@@ -50,7 +50,7 @@ public class MainFrame extends JFrame
                 SaveField(new Map_Storage(i), fileName);
 
                 //정보 받을 객체
-                if (i == 1)
+                if (i == 2)
                     From_File = LoadField(fileName);
 
 

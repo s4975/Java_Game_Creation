@@ -46,17 +46,16 @@ public class New_Map extends Map_Storage
                 break;
 
             case 2:
-                for (int i = 0; i < 12; i++)
-                    for (int j = 0; j < 7; j++)
-                    {
-                        blockMap.put(new BlockPosition(i, j), new Wall(false, false, true, false));
-                        if (i == 11 && j == 6)
-                        {
-                            blockMap.put(new BlockPosition(11,6), new Goal(false,false, true, false));
-                        }
-                    }
 
-                entityPos.add(new BlockPosition(0,5));
+                for (int i = 0; i < 7; i++)
+                {
+                    blockMap.put(new BlockPosition(5, i), new Wall(true, true, true, true));
+                    blockMap.put(new BlockPosition(6, i), new Wall(true, true, true, true));
+                }
+
+                blockMap.put(new BlockPosition(10,3), new Goal(false,false, true, false));
+
+                entityPos.add(new BlockPosition(1,3));
                 entities.add(new Player());
                 break;
 
