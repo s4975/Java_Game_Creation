@@ -52,8 +52,6 @@ public class MainFrame extends JFrame
                 //정보 받을 객체
                 if (i == 2)
                     From_File = LoadField(fileName);
-
-
             }
 
             add(new LayeredField(From_File, this)); //새로운 LayeredField 생성

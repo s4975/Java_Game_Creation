@@ -66,13 +66,13 @@ public class New_Map extends Map_Storage
                     for (int j = 0; j < 7; j++)
                     {
                         blockMap.put(new BlockPosition(i, j), new Wall(false, false, true, false));
-                        if (i == 11 && j == 6)
+                        if (i == 10 && j == 3)
                         {
-                            blockMap.put(new BlockPosition(11,6), new Goal(false,false, true, false));
+                            blockMap.put(new BlockPosition(10,3), new Goal(false,false, true, false));
                         }
                     }
 
-                entityPos.add(new BlockPosition(0,5));
+                entityPos.add(new BlockPosition(1,3));
                 entities.add(new Player());
                 break;
 
