@@ -13,6 +13,7 @@ public class New_Map extends Map_Storage
         switch (stage)
         {
             case 1:
+                //기본 튜토리얼, 캐릭터 움직임을 배움
                 //초기 필드 상태 대입 예정
                 for (int i = 0; i < 7; i++)
                 {
@@ -36,9 +37,6 @@ public class New_Map extends Map_Storage
                    }
                }
 
-
-
-
                blockMap.put(new BlockPosition(9,2), new Goal(false, false, false, false));
 
                 entityPos.add(new BlockPosition(2,3));
@@ -46,7 +44,8 @@ public class New_Map extends Map_Storage
                 break;
 
             case 2:
-
+                //심화 튜토리얼
+                //2칸짜리 벽을 넘는것을 연습함
                 for (int i = 0; i < 7; i++)
                 {
                     blockMap.put(new BlockPosition(5, i), new Wall(true, true, true, true));
@@ -61,6 +60,8 @@ public class New_Map extends Map_Storage
 
 
             case 3:
+                //벽 심화 학습
+                //모든 벽면이 벽으로 둘러 싸여져 있음
                 for (int i = 0; i < 12; i++)
                     for (int j = 0; j < 7; j++)
                     {

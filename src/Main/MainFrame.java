@@ -18,7 +18,7 @@ public class MainFrame extends JFrame
 
     String Game_Stage = ""; //현재 play 하고 있는 stage
 
-    boolean DeveloperMode = true; //개발자 모드
+    boolean DeveloperMode = false; //개발자 모드
 
     public MainFrame() //생성자
     {
