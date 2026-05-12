@@ -1,3 +1,6 @@
-# Java_Game_Creation
+<h1> # Java_Game_Creation </h1>
 자바 게임 개발 프로젝트 중 슈뢰딩거 고양이 이야기 제작 일기
 
+<h2>프로젝트 실행 방법</h2>
+해당 프로젝트는 IntelliJ IDEA 환경에서 개발되었습니다.
+해당 환경을 설치한 다음, 
