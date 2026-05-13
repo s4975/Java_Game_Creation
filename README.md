@@ -15,3 +15,5 @@
 12.09 : Player move sycle 구현
 
 12.17 : Lobey, Stage 화면 구현
+
+03.10 : 프로젝트 스테이지 개선, 디자인 변경
