@@ -14,7 +14,7 @@ public class Field extends JPanel implements KeyListener {
     private final Map_Storage start_Map; //초기 맵
     private Map_Storage current_Map; //현재 맵
 
-    private LayeredField layeredField; //겹쳐진 필드 받기
+    private final LayeredField layeredField; //겹쳐진 필드 받기
     private final Sight sight;
 
     boolean focused = true;

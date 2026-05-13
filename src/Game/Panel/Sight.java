@@ -57,7 +57,7 @@ public class Sight extends JPanel
         sight_check(invisible, 7, 2, 2, 2, true); //북서
 
         sight_check(invisible, 0, 4, 1, 2,
-                sight_check2(invisible, new BlockPosition(map.getPlayerPos().getPosX(),map.getPlayerPos().getPosY() + - 1))); //북동북
+                sight_check2(invisible, new BlockPosition(map.getPlayerPos().getPosX(),map.getPlayerPos().getPosY() - 1))); //북동북
         sight_check(invisible, 1, 5, 2, 2,
                 sight_check2(invisible, new BlockPosition(map.getPlayerPos().getPosX() + 1,map.getPlayerPos().getPosY() ))); //북동동
         sight_check(invisible, 1, 5, 4, 2,
