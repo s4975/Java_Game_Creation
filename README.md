@@ -17,3 +17,9 @@
 12.17 : Lobey, Stage 화면 구현
 
 03.10 : 프로젝트 스테이지 개선, 디자인 변경
+
+<p> 배운점: git 버전 관리를 어떻게 하는지 학습 </p>
+<p>일일이 캐릭터 시아를 찾아서 보여주는 알고리즘</p>
+<p>JAVA class 상속과 객체 관리 </p>
+<p>JAVA Swing layer 쌓는 방법 </p>
+<p>event triger와 event handler </p>
